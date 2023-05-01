@@ -1,4 +1,5 @@
 import { HttpMethod, QueryResults, useFetch } from './Fetch'
+import { useEffect } from 'react'
 
 interface SignInRequest {
     username: string
@@ -11,7 +12,7 @@ enum Permissions {
     GOD = 'GOD'
 }
 
-interface SessionResponse {
+export interface Session {
     token: string,
     username: string,
     expirationTimeSeconds: number,
@@ -19,18 +20,47 @@ interface SessionResponse {
 }
 
 export interface SignInResults extends QueryResults {
-    data: SessionResponse | null,
+    data: Session | null,
     signIn: (signInRequest: SignInRequest) => Promise<void>
 }
 
 export const useSignIn = (): SignInResults => {
     const { data, error, loading, fetchData } = useFetch('/auth', HttpMethod.PUT)
     const signIn = async ({ username, password }: SignInRequest) => {
+        console.log('signIn')
         await fetchData({
             username,
             password
         })
     }
 
+    useEffect(() => {
+        if (data) {
+            console.log(data)
+            localStorage.setItem('token', data.token)
+            localStorage.setItem('username', data.username)
+            localStorage.setItem('expirationTimeSeconds', data.expirationTimeSeconds.toString())
+            localStorage.setItem('permissions', data.permissions)
+        }
+    }, [data])
+
     return { data, error, loading, signIn }
+}
+
+export const getSession = (): Session | null => {
+    const token = localStorage.getItem('token')
+    const username = localStorage.getItem('username')
+    const expirationTimeSeconds = localStorage.getItem('expirationTimeSeconds')
+    const permissions = localStorage.getItem('permissions')
+
+    if (token && username && expirationTimeSeconds && permissions && parseInt(expirationTimeSeconds) > Date.now() / 1000) {
+        return {
+            token,
+            username,
+            expirationTimeSeconds: parseInt(expirationTimeSeconds),
+            permissions: permissions as Permissions
+        }
+    }
+
+    return null
 }

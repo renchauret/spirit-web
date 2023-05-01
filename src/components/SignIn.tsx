@@ -1,8 +1,12 @@
 import React, { useEffect } from 'react'
 import { useFormik } from 'formik'
-import { useSignIn } from '../hooks/Auth'
+import { Session, useSignIn } from '../hooks/Auth'
 
-export const SignIn = () => {
+interface SignInProps {
+    setSession: (session: Session) => void
+}
+
+export const SignIn = ({ setSession }: SignInProps) => {
     const { data, loading, error, signIn } = useSignIn()
     const signInForm = useFormik({
         initialValues: {
@@ -15,12 +19,12 @@ export const SignIn = () => {
     })
     useEffect(() => {
         if (data) {
-            console.log(data)
+            setSession(data)
         }
         if (error) {
-            console.log(error)
+            console.error(error)
         }
-    }, [data, error])
+    }, [data, error, setSession])
 
     return (
         <div className="SignIn">
