@@ -25,7 +25,7 @@ interface DrinksResults extends QueryResults {
 }
 
 export const useGetDrinks = (): DrinksResults => {
-    const { data, error, loading, fetchData } = useFetch('/drink/all', HttpMethod.GET)
+    const { data, error, loading, fetchData } = useFetch('/user/drink/all', HttpMethod.GET)
     useEffect(() => {
         fetchData()
     }, [fetchData])
