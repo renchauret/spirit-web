@@ -3,6 +3,7 @@ import { useGetDrinks } from '../hooks/Drinks'
 
 export const Drinks = () => {
     const { data: drinks } = useGetDrinks()
+
     if (!drinks) return <></>
 
     return (
@@ -10,6 +11,9 @@ export const Drinks = () => {
             {drinks.map(drink => (
                 <div key={drink.guid}>
                     <h2>{drink.name}</h2>
+                    {drink.imagePath &&
+                        <img src={drink.imagePath} alt={drink.name} />
+                    }
                 </div>
             ))}
         </div>
