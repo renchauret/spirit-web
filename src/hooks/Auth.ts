@@ -1,5 +1,5 @@
 import { HttpMethod, QueryResults, useFetch } from './Fetch'
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 
 interface SignInRequest {
     username: string
@@ -26,13 +26,12 @@ export interface SignInResults extends QueryResults {
 
 export const useSignIn = (): SignInResults => {
     const { data, error, loading, fetchData } = useFetch('/auth', HttpMethod.PUT)
-    const signIn = async ({ username, password }: SignInRequest) => {
-        console.log('signIn')
+    const signIn = useCallback(async ({ username, password }: SignInRequest) => {
         await fetchData({
             username,
             password
         })
-    }
+    }, [fetchData])
 
     useEffect(() => {
         if (data) {
@@ -44,7 +43,7 @@ export const useSignIn = (): SignInResults => {
         }
     }, [data])
 
-    return { data, error, loading, signIn }
+    return { data: data, error, loading, signIn }
 }
 
 export const getSession = (): Session | null => {

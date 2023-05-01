@@ -1,9 +1,9 @@
 import React from 'react'
-import { SignIn } from './components/SignIn'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Header } from './components/Header'
 import './App.css'
 import { SignInPrompt } from './components/SignInPrompt'
+import { Drinks } from './components/Drinks'
 
 export const App = () => {
     return (
@@ -11,8 +11,7 @@ export const App = () => {
             <SignInPrompt />
             <Header />
             <Routes>
-                {/*<Route path="/signin" element={<SignIn />} />*/}
-                <Route path="" element={<></>} />
+                <Route path="" element={<Drinks />} />
             </Routes>
         </BrowserRouter>
     )

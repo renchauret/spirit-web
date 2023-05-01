@@ -1,4 +1,5 @@
-import { useReducer, useRef } from 'react'
+import { useCallback, useReducer, useRef } from 'react'
+import { getSession } from './Auth'
 
 enum HttpStatus {
     DONE,
@@ -48,12 +49,13 @@ export const useFetch = (path: string, method: HttpMethod = HttpMethod.GET): Que
     }, initialState)
     const cache = useRef({})
 
-    const fetchData = async (body: any = null) => {
+    const fetchData = useCallback(async (body: any = null, headers: any = null) => {
         dispatch({ type: HttpStatus.LOADING, payload: null })
+        const session = getSession()
         const requestOptions = {
             method: method,
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(body)
+            headers: { 'Content-Type': 'application/json', 'Authorization': session?.token, ...headers },
+            body: body ? JSON.stringify(body) : undefined
         }
         if (cache.current[url]) {
             const data = cache.current[url]
@@ -68,7 +70,7 @@ export const useFetch = (path: string, method: HttpMethod = HttpMethod.GET): Que
                 dispatch({ type: HttpStatus.ERROR, payload: error.message })
             }
         }
-    }
+    }, [method, url])
 
     return { ...state, fetchData }
 }

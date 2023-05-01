@@ -7,7 +7,7 @@ interface SignInProps {
 }
 
 export const SignIn = ({ setSession }: SignInProps) => {
-    const { data, loading, error, signIn } = useSignIn()
+    const { data: session, loading, error, signIn } = useSignIn()
     const signInForm = useFormik({
         initialValues: {
             username: '',
@@ -18,13 +18,13 @@ export const SignIn = ({ setSession }: SignInProps) => {
         }
     })
     useEffect(() => {
-        if (data) {
-            setSession(data)
+        if (session) {
+            setSession(session)
         }
         if (error) {
             console.error(error)
         }
-    }, [data, error, setSession])
+    }, [session, error, setSession])
 
     return (
         <div className="SignIn">
