@@ -6,17 +6,18 @@ import { GalleryImage } from './GalleryImage'
 export const Drinks = () => {
     const { data: drinks } = useGetDrinks()
     const images = useMemo(() =>
-        (drinks && drinks.map(drink =>
-            <GalleryImage id={drink.guid} imageUrl={drink.imagePath ?? ''} linkUrl={'/'} />
-        )) || [],
-    [drinks]
+            (drinks && drinks.map(drink =>
+                <GalleryImage id={drink.guid} imageUrl={drink.imagePath ?? 'assets/drink.png'} linkUrl="/"
+                              invert={Boolean(!drink.imagePath)} />
+            )) || [],
+        [drinks]
     )
 
     if (!drinks) return <></>
 
     return (
         <div
-            className="mx-auto my-0 text-center content-center"
+            className="mx-auto my-4 text-center content-center w-4/5"
             id="gallery"
             // ref={element => {
             //     this.galleryElement = element
