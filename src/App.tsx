@@ -1,7 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Header } from './components/Header'
-import './App.css'
 import { SignInPrompt } from './components/SignInPrompt'
 import { Drinks } from './components/Drinks'
 
