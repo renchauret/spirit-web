@@ -13,7 +13,7 @@ export const Drinks = () => {
         [drinks]
     )
 
-    if (!drinks) return <></>
+    if (!images) return <></>
 
     return (
         <div
