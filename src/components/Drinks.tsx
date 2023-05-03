@@ -19,18 +19,11 @@ export const Drinks = () => {
         <div
             className="mx-auto my-4 text-center content-center w-4/5"
             id="gallery"
-            // ref={element => {
-            //     this.galleryElement = element
-            // }}
             // onScroll={this.handleScroll}
         >
             <MasonryComponent
-                className={'grid-cols-5 grid my-0 mx-auto w-full list-none'}
-                elementType={'div'} // default 'div'
-                // options={} // default {}
-                disableImagesLoaded={false} // default false
-                updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
-                // imagesLoadedOptions={} // default {}
+                className="grid my-0 mx-auto w-full list-none grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
+                elementType="div"
             >
                 {images}
             </MasonryComponent>
