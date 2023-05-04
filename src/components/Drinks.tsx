@@ -8,17 +8,16 @@ export const Drinks = () => {
     const images = useMemo(() =>
             (drinks && drinks.map(drink =>
                 <GalleryImage id={drink.guid} imageUrl={drink.imagePath ?? 'assets/drink.png'} linkUrl="/"
-                              invert={Boolean(!drink.imagePath)} />
+                              invert={Boolean(!drink.imagePath)} name={drink.name} />
             )) || [],
         [drinks]
     )
 
     if (!images || images.length === 0) return <></>
-    // if (!drinks) return <></>
 
     return (
         <div
-            className="mx-auto my-4 text-center content-center w-4/5"
+            className="mx-auto my-4 text-center content-center md:w-4/5"
             id="gallery"
         >
             <MasonryComponent
