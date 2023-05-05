@@ -1,5 +1,5 @@
 import { HttpMethod, QueryResults, useFetch } from './Fetch'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 
 interface DrinkIngredient {
     ingredientGuid: string,
@@ -24,10 +24,11 @@ interface DrinksResults extends QueryResults {
     data: Drink[] | null
 }
 
-export const useGetDrinks = (): DrinksResults => {
-    const { data, error, loading, fetchData } = useFetch('/user/drink/all', HttpMethod.GET)
+export const useGetDrinks = (page: number = 1): DrinksResults => {
+    const { data, error, loading, fetchData } = useFetch('/admin/drink/all', HttpMethod.GET)
     useEffect(() => {
         fetchData()
-    }, [fetchData])
-    return { data: data, error, loading }
+    }, [fetchData, page])
+    const slicedData = useMemo(() => data?.slice(0, page * 100), [data, page])
+    return { data: slicedData, error, loading }
 }
