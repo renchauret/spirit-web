@@ -9,8 +9,8 @@ export const DrinkGallery = () => {
 
     const images = useMemo(() =>
             (drinks && drinks.map(drink =>
-                <GalleryImage id={drink.guid} imageUrl={drink.imagePath ?? 'assets/drink.png'} linkUrl={`/drink/${drink.guid}`}
-                              invert={Boolean(!drink.imagePath)} name={drink.name} />
+                <GalleryImage id={drink.guid} imageUrl={drink.imageUrl ?? 'assets/drink.png'} linkUrl={`/drink/${drink.guid}`}
+                              invert={Boolean(!drink.imageUrl)} name={drink.name} />
             )) || [],
         [drinks]
     )

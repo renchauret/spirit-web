@@ -15,15 +15,15 @@ const DrinkPage = ({ drinkGuid }: DrinkPageProps) => {
 export const RoutedDrinkPage = withRouter<any>(DrinkPage)
 
 interface DrinkProps {
-    drink: FullDrink
+    drink: FullDrink | null
 }
 
 export const DrinkView = ({ drink }: DrinkProps) => {
-    const { name, imagePath, ingredients, instructions, liked, tags, glass, ibaCategory } = drink ?? {}
+    const { name, imageUrl, ingredients, instructions, liked, tags, glass, ibaCategory } = drink ?? {}
     return (
         <div>
             <h1>{name}</h1>
-            <img src={imagePath ?? 'assets/png'} alt={name} />
+            {imageUrl && <img src={imageUrl} alt={name} />}
             {ingredients && ingredients.length > 0 && <ul>
                 {ingredients.map(ingredient => <li>{ingredient.ingredientName}</li>)}
             </ul>}

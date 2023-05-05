@@ -4,6 +4,8 @@ import { Header } from './components/Header'
 import { SignInPrompt } from './components/SignInPrompt'
 import { DrinkGallery } from './components/DrinkGallery'
 import { RoutedDrinkPage } from './components/DrinkView'
+import { RoutedIngredientPage } from './components/IngredientView'
+import { IngredientGallery } from './components/IngredientGallery'
 
 export const App = () => {
     return (
@@ -12,8 +14,10 @@ export const App = () => {
                 <SignInPrompt />
                 <Header />
                 <Routes>
-                    <Route path="" element={<DrinkGallery />} />
+                    <Route path="/drinks" element={<DrinkGallery />} />
                     <Route path="drink/:drinkGuid" element={<RoutedDrinkPage />} />
+                    <Route path="/ingredients" element={<IngredientGallery />} />
+                    <Route path="ingredient/:ingredientGuid" element={<RoutedIngredientPage />} />
                 </Routes>
             </BrowserRouter>
         </div>

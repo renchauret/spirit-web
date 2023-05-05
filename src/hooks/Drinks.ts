@@ -9,6 +9,7 @@ interface DrinkIngredient {
 
 interface FullDrinkIngredient extends DrinkIngredient {
     ingredientName: string,
+    description: string | null,
     imagePath: string | null,
     type: string | null,
     liked: boolean
@@ -21,7 +22,8 @@ export interface Drink {
     ingredients: DrinkIngredient[],
     instructions: string[],
     tags: string[],
-    imagePath: string | null,
+    description: string | null,
+    imageUrl: string | null,
     glass: string | null,
     ibaCategory: string | null,
     liked: boolean
@@ -36,7 +38,7 @@ interface DrinksResults extends QueryResults {
 }
 
 interface DrinkResult extends QueryResults {
-    data: FullDrink
+    data: FullDrink | null
 }
 
 export const useGetDrinks = (page: number = 1): DrinksResults => {
