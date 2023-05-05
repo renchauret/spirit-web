@@ -7,7 +7,14 @@ interface DrinkIngredient {
     unit: string | null
 }
 
-interface Drink {
+interface FullDrinkIngredient extends DrinkIngredient {
+    ingredientName: string,
+    imagePath: string | null,
+    type: string | null,
+    liked: boolean
+}
+
+export interface Drink {
     guid: string,
     username: string,
     name: string,
@@ -20,8 +27,16 @@ interface Drink {
     liked: boolean
 }
 
+export interface FullDrink extends Drink {
+    ingredients: FullDrinkIngredient[]
+}
+
 interface DrinksResults extends QueryResults {
     data: Drink[] | null
+}
+
+interface DrinkResult extends QueryResults {
+    data: FullDrink
 }
 
 export const useGetDrinks = (page: number = 1): DrinksResults => {
@@ -31,4 +46,12 @@ export const useGetDrinks = (page: number = 1): DrinksResults => {
     }, [fetchData, page])
     const slicedData = useMemo(() => data?.slice(0, page * 100), [data, page])
     return { data: slicedData, error, loading }
+}
+
+export const useGetDrink = (guid: string): DrinkResult => {
+    const { data, error, loading, fetchData } = useFetch('/admin/drink', HttpMethod.GET)
+    useEffect(() => {
+        fetchData(null, null, new Map<string, string>([['guid', guid]]))
+    }, [fetchData, guid])
+    return { data, error, loading }
 }

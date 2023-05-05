@@ -1,5 +1,4 @@
 import React, { useCallback, useMemo } from 'react'
-import { GalleryImage } from './GalleryImage'
 import { Waypoint } from 'react-waypoint'
 
 interface GalleryProps {
@@ -23,7 +22,7 @@ export const Gallery = ({ images, page, setPage }: GalleryProps) => {
 
     return (
         <div
-            className="mx-auto my-4 text-center content-center md:w-4/5"
+            className="mx-auto my-4 text-center content-center"
             id="gallery"
             onScroll={handleScroll}
         >
