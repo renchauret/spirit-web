@@ -24,10 +24,11 @@ interface DrinksResults extends QueryResults {
     data: Drink[] | null
 }
 
-export const useGetDrinks = (): DrinksResults => {
+export const useGetDrinks = (page: number = 1): DrinksResults => {
     const { data, error, loading, fetchData } = useFetch('/admin/drink/all', HttpMethod.GET)
     useEffect(() => {
-        fetchData()
-    }, [fetchData])
+        console.log(page)
+        fetchData(null, null, new Map([['page', page.toString()]]))
+    }, [fetchData, page])
     return { data: data, error, loading }
 }

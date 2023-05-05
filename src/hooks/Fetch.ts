@@ -20,7 +20,7 @@ export interface QueryResults {
 }
 
 export interface Query extends QueryResults {
-    fetchData: (body?: any) => Promise<void>
+    fetchData: (body?: any, headers?: Map<string, string> | null, queryParams?: Map<string, string> | null) => Promise<void>
 }
 
 export const useFetch = (path: string, method: HttpMethod = HttpMethod.GET): Query => {
@@ -49,22 +49,32 @@ export const useFetch = (path: string, method: HttpMethod = HttpMethod.GET): Que
     }, initialState)
     const cache = useRef({})
 
-    const fetchData = useCallback(async (body: any = null, headers: any = null) => {
+    const fetchData = useCallback(async (
+        body: any = null,
+        headers: Map<string, string> | null = null,
+        queryParams: Map<string, string> | null = null
+    ) => {
         dispatch({ type: HttpStatus.LOADING, payload: null })
         const session = getSession()
         const requestOptions = {
             method: method,
-            headers: { 'Content-Type': 'application/json', 'Authorization': session?.token, ...headers },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': session?.token,
+                ...Object.fromEntries(headers ?? new Map())
+            },
             body: body ? JSON.stringify(body) : undefined
         }
-        if (cache.current[url]) {
-            const data = cache.current[url]
+        console.log(requestOptions)
+        const urlWithParams = `${url}${queryParams ? '?' + new URLSearchParams(Object.fromEntries(queryParams)).toString() : ''}`
+        if (cache.current[urlWithParams]) {
+            const data = cache.current[urlWithParams]
             dispatch({ type: HttpStatus.DONE, payload: data })
         } else {
             try {
-                const response = await fetch(url, requestOptions)
+                const response = await fetch(urlWithParams, requestOptions)
                 const data = await response.json()
-                cache.current[url] = data
+                cache.current[urlWithParams] = data
                 dispatch({ type: HttpStatus.DONE, payload: data })
             } catch (error: any) {
                 dispatch({ type: HttpStatus.ERROR, payload: error.message })
