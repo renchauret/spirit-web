@@ -2,8 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg-color: #1A1A1D;
+}
+
 body {
-  background-color: #1A1A1D;
+  background-color: var(--bg-color);
   color: whitesmoke;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
