@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import { useGetDrinks } from '../hooks/Drinks'
-import { MasonryComponent } from './Masonry'
 import { GalleryImage } from './GalleryImage'
 import { Waypoint } from 'react-waypoint'
 
@@ -23,8 +22,6 @@ export const Drinks = () => {
         [drinks, handleScroll]
     )
 
-    console.log(drinks)
-
     if (!images || images.length === 0) return <></>
 
     return (
@@ -33,12 +30,9 @@ export const Drinks = () => {
             id="gallery"
             onScroll={handleScroll}
         >
-            <MasonryComponent
-                className="grid my-0 mx-auto w-full list-none grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
-                elementType="div"
-            >
+            <div className="grid my-0 mx-auto w-full list-none grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
                 {images}
-            </MasonryComponent>
+            </div>
         </div>
     )
 }

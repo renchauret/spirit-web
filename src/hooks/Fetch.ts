@@ -65,7 +65,6 @@ export const useFetch = (path: string, method: HttpMethod = HttpMethod.GET): Que
             },
             body: body ? JSON.stringify(body) : undefined
         }
-        console.log(requestOptions)
         const urlWithParams = `${url}${queryParams ? '?' + new URLSearchParams(Object.fromEntries(queryParams)).toString() : ''}`
         if (cache.current[urlWithParams]) {
             const data = cache.current[urlWithParams]
