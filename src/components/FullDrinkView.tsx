@@ -10,8 +10,12 @@ interface FullDrinkViewProps {
 export const FullDrinkView: FC<FullDrinkViewProps> = ({ drink }) => {
     return (
         <div className="p-4">
-            <h1 className="text-xl font-bold">{capitalizeWords(drink.name)}</h1>
-            <img className="max-w-full h-auto object-contain mb-4" src={drink.imageUrl || ''} alt={drink.name} />
+            <div className="flex justify-between items-center">
+                <h1 className="text-xl font-bold">{capitalizeWords(drink.name)}</h1>
+                <span style={{ fontSize: '2rem', color: drink.liked ? 'var(--accent-color)' : 'inherit' }}>★</span>
+            </div>
+            <img className="max-w-full h-auto object-contain mb-4" style={{ 'width': '500px' }}
+                 src={drink.imageUrl || ''} alt={drink.name} />
             <p>{drink.description}</p>
             <h2 className="text-lg font-bold mt-4">Ingredients:</h2>
             <ul>
