@@ -21,11 +21,11 @@ export const FullDrinkView: FC<FullDrinkViewProps> = ({ drink }) => {
             <ul>
                 {drink.ingredients.map((ingredient, index) => (
                     <li key={index} className="flex items-center">
+                        {ingredient.imageUrl &&
+                            <Link to={`/ingredient/${ingredient.ingredientGuid}`}>
+                                <img className="w-16 h-16 object-cover mr-2" src={ingredient.imageUrl} alt={ingredient.ingredientName} />
+                            </Link>}
                         <Link to={`/ingredient/${ingredient.ingredientGuid}`}>
-                            {ingredient.imageUrl &&
-                                <img className="w-16 h-16 object-cover mr-2" src={ingredient.imageUrl}
-                                     alt={ingredient.ingredientName} />
-                            }
                             <p>{`${ingredient.amount ? ingredient.amount + ' ' : ''}${ingredient.unit ? ingredient.unit + ' ' : ''}${capitalizeWords(ingredient.ingredientName)}`}</p>
                         </Link>
                     </li>
