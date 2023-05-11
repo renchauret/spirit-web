@@ -10,7 +10,7 @@ interface DrinkIngredient {
 interface FullDrinkIngredient extends DrinkIngredient {
     ingredientName: string,
     description: string | null,
-    imagePath: string | null,
+    imageUrl: string | null,
     type: string | null,
     liked: boolean
 }

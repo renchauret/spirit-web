@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Header } from './components/Header'
 import { SignInPrompt } from './components/SignInPrompt'
 import { DrinkGallery } from './components/DrinkGallery'
-import { RoutedDrinkPage } from './components/DrinkView'
-import { RoutedIngredientPage } from './components/IngredientView'
+import { RoutedDrinkPage } from './components/DrinkPage'
+import { RoutedIngredientPage } from './components/IngredientPage'
 import { IngredientGallery } from './components/IngredientGallery'
 
 export const App = () => {
