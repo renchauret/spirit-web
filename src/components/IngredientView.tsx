@@ -1,11 +1,10 @@
 import React, { FC } from 'react'
 import { Ingredient } from '../hooks/Ingredients'
+import { capitalizeWords } from '../util/strings'
 
 interface IngredientViewProps {
     ingredient: Ingredient
 }
-
-const capitalizeWords = (str: string) => str.replace(/\b\w/g, l => l.toUpperCase())
 
 export const IngredientView: FC<IngredientViewProps> = ({ ingredient }) => {
     return (

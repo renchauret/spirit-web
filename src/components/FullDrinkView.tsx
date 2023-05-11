@@ -1,12 +1,11 @@
 import React, { FC } from 'react'
 import { FullDrink } from '../hooks/Drinks'
 import { Link } from 'react-router-dom'
+import { capitalizeWords } from '../util/strings'
 
 interface FullDrinkViewProps {
     drink: FullDrink
 }
-
-const capitalizeWords = (str: string) => str.replace(/\b\w/g, l => l.toUpperCase())
 
 export const FullDrinkView: FC<FullDrinkViewProps> = ({ drink }) => {
     return (

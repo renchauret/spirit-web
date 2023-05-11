@@ -1,6 +1,6 @@
 import React from 'react'
 import { withRouter } from './WithRouter'
-import { Ingredient, useGetIngredient } from '../hooks/Ingredients'
+import { useGetIngredient } from '../hooks/Ingredients'
 import { IngredientView } from './IngredientView'
 
 interface IngredientPageProps {
