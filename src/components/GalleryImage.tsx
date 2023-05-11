@@ -1,4 +1,5 @@
 import React from 'react'
+import { capitalizeWords } from '../util/strings'
 
 interface GalleryImageProps {
     id: string
@@ -17,7 +18,7 @@ export const GalleryImage = ({ id, imageUrl, linkUrl, invert = false, name = nul
                         className="pointer-events-none text-left ml-1 mt-1 z-20 absolute cursor-pointer py-1 px-2 rounded"
                         style={{ backgroundColor: 'var(--bg-color)' }}
                     >
-                        {name}
+                        {capitalizeWords(name)}
                     </div>
                 }
                 <img
